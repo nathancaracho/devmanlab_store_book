@@ -26,7 +26,7 @@ namespace DevMan.BookStore.App.Controllers
         /// <returns>A Category</returns>
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<Category>> Get([FromRoute] int id)
         {
@@ -37,7 +37,24 @@ namespace DevMan.BookStore.App.Controllers
 
             return Ok((Category)category);
         }
-
+        
+        /// <summary>
+        ///     Get paged categories without filter
+        /// </summary>
+        /// <param name="page">page index</param>
+        /// <param name="size">page size</param>
+        /// <returns>list of categories</returns>
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<IEnumerable<Category>>> Get([FromQuery] int page = 1, [FromQuery] int size = 30)
+        {
+            var categories = await _context.Categories.AsQueryable().Skip(page).Take(size).ToListAsync();
+            if (categories.Any() is false)
+                return NotFound();
+            return Ok(categories);
+        }
+        
         /// <summary>
         ///   Save a category
         /// </summary>
@@ -71,7 +88,7 @@ namespace DevMan.BookStore.App.Controllers
             await _context.SaveChangesAsync();
             return Ok(category);
         }
-        
+
         /// <summary>
         ///     Delete a Category by Id
         /// </summary>
