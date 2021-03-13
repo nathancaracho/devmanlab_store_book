@@ -7,11 +7,13 @@ namespace DevMan.BookStore.Infrastructure
     public class BookStoreContext : DbContext
     {
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Author> Authors { get; set; }
         public BookStoreContext(DbContextOptions<BookStoreContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             CategoryMapper.Map(modelBuilder);
+            AuthorMapper.Map(modelBuilder);
         }
     }
 }

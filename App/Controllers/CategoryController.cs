@@ -14,7 +14,7 @@ namespace DevMan.BookStore.App.Controllers
     [Route("[controller]")]
     public class CategoryController : ControllerBase
     {
-        private BookStoreContext _context;
+        private readonly BookStoreContext _context;
 
         public CategoryController(BookStoreContext context) =>
             _context = context;
