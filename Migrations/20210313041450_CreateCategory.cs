@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace DevManLab.Migrations
+namespace DevMan.BookStore.Migrations
 {
     public partial class CreateCategory : Migration
     {

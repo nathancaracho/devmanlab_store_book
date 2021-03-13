@@ -2,11 +2,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DevMan.BookStore.App.DTO;
-using Domain.Models;
-using DevMan.BookStore.infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
+using DevMan.BookStore.Infrastructure;
+using DevMan.BookStore.Domain.Models;
 
 namespace DevMan.BookStore.App.Controllers
 {
@@ -37,7 +37,7 @@ namespace DevMan.BookStore.App.Controllers
 
             return Ok((Category)category);
         }
-        
+
         /// <summary>
         ///     Get paged categories without filter
         /// </summary>
@@ -54,7 +54,7 @@ namespace DevMan.BookStore.App.Controllers
                 return NotFound();
             return Ok(categories);
         }
-        
+
         /// <summary>
         ///   Save a category
         /// </summary>

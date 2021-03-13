@@ -1,4 +1,4 @@
-namespace Domain.Models
+namespace DevMan.BookStore.Domain.Models
 {
     public class Category
     {
