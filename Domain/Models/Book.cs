@@ -68,10 +68,5 @@ namespace DevMan.BookStore.Domain.Models
             Categories = categories ?? Categories;
         }
 
-        public void RemoveAuthor(int authorId) =>
-           Authors = Authors.Where(author => author.Id == authorId);
-        public void RemoveCategory(int categoryId) =>
-            Categories = Categories.Where(Category => Category.Id == categoryId);
-
     }
 }
