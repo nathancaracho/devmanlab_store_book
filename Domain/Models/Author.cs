@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace DevMan.BookStore.Domain.Models
 {
@@ -25,6 +26,8 @@ namespace DevMan.BookStore.Domain.Models
         /// </summary>
         /// <example>74</example>
         public int Age => DateTime.Now.Year - Birthday.Year;
+
+        public IEnumerable<Book> Books { get; private set; }
 
         public static Author Create(string name, DateTime birthday) =>
             new Author

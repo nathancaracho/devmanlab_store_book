@@ -1,3 +1,7 @@
+
+
+using System.Collections.Generic;
+
 namespace DevMan.BookStore.Domain.Models
 {
     public class Category
@@ -17,6 +21,9 @@ namespace DevMan.BookStore.Domain.Models
         /// </summary>
         /// <example>Fantasy is a genre of literature that features magical and supernatural elements </example>
         public string Description { get; private set; }
+
+
+        public IEnumerable<Book> Books { get; private set; }
 
         /// <summary>
         /// Create category with name and description

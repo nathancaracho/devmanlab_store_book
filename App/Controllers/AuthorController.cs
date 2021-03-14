@@ -3,7 +3,6 @@ using DevMan.BookStore.App.DTO;
 using DevMan.BookStore.Domain.Models;
 using DevMan.BookStore.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq;
 using Microsoft.EntityFrameworkCore;
 
 namespace DevMan.BookStore.App.Controllers
@@ -40,11 +39,11 @@ namespace DevMan.BookStore.App.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] AuthorRequest request)
         {
-
-            _context.Add(Author.Create(request.Name, request.Birthday));
+            var author = Author.Create(request.Name, request.Birthday);
+            _context.Add(author);
             await _context.SaveChangesAsync();
 
-            return Ok();
+            return Ok(author);
         }
 
         /// <summary>
@@ -59,7 +58,7 @@ namespace DevMan.BookStore.App.Controllers
             var author = await _context.Authors.AsQueryable().FirstAsync(author => author.Id == id);
             author.Update(request.Name, request.Birthday);
             await _context.SaveChangesAsync();
-            return Ok();
+            return Ok(author);
         }
 
         /// <summary>
@@ -70,7 +69,8 @@ namespace DevMan.BookStore.App.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
-            _context.Authors.Remove(Author.Create(id));
+            var author = Author.Create(id);
+            _context.Authors.Remove(author);
             await _context.SaveChangesAsync();
             return Ok();
         }
