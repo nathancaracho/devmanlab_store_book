@@ -61,7 +61,7 @@ namespace DevMan.BookStore.App.Controllers
             book.Update(request.Title, request.BriefDescription, request.Description, authors, categories);
             return Ok(book);
         }
-        
+
         /// <summary>
         /// Delete a book by Id
         /// </summary>
@@ -90,5 +90,6 @@ namespace DevMan.BookStore.App.Controllers
                                 .FirstAsync(b => b.Id == id);
             return Ok(book);
         }
+
     }
 }

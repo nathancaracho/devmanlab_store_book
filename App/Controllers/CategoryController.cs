@@ -35,7 +35,7 @@ namespace DevMan.BookStore.App.Controllers
             if (category is null)
                 return NotFound();
 
-            return Ok((Category)category);
+            return Ok(category);
         }
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace DevMan.BookStore.App.Controllers
             _context.Add(category);
             await _context.SaveChangesAsync();
 
-            return Ok();
+            return Ok(category);
         }
 
         /// <summary>
@@ -96,9 +96,10 @@ namespace DevMan.BookStore.App.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
-            _context.Categories.Remove(Category.Create(id));
+            var category = Category.Create(id);
+            _context.Categories.Remove(category);
             await _context.SaveChangesAsync();
-            return Ok();
+            return Ok(category);
         }
     }
 }

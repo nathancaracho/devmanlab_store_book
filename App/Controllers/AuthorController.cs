@@ -25,7 +25,10 @@ namespace DevMan.BookStore.App.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Author>> Get(int id)
         {
-            var author = await _context.Authors.AsQueryable().FirstOrDefaultAsync(author => author.Id == id);
+            var author = await _context
+                                    .Authors
+                                    .Include(a => a.Books)
+                                    .FirstOrDefaultAsync(author => author.Id == id);
 
             if (author is null)
                 return NotFound();
